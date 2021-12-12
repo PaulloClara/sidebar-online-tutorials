@@ -1,9 +1,9 @@
 <script lang="ts" setup></script>
 
 <template>
-  <main class="home">
-    <h1>Home</h1>
-  </main>
+  <aside class="c-sidebar">
+    <p>Sidebar</p>
+  </aside>
 </template>
 
 <style lang="scss"></style>
