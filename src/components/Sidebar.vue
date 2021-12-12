@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from "@vue/reactivity";
+withDefaults(defineProps<{ active: boolean }>(), { active: false });
 
 const links = [
   { title: "Home", icon: "fas fa-home", to: { name: "home" } },
@@ -10,12 +10,10 @@ const links = [
   { title: "Password", icon: "fas fa-key", to: { name: "password" } },
   { title: "Sign Out", icon: "fas fa-sign-out-alt", to: { name: "signOut" } },
 ];
-
-const show = ref(true);
 </script>
 
 <template>
-  <aside :class="['c-sidebar', { 'is-active': show }]">
+  <aside :class="['c-sidebar', { 'is-active': active }]">
     <ul class="sidebar-content">
       <template v-for="(link, index) of links" :key="index">
         <li class="sidebar-item">
@@ -30,17 +28,13 @@ const show = ref(true);
       </template>
     </ul>
   </aside>
-
-  <button :class="['toggle', { 'is-active fas fa-times': show, 'fas fa-bars': !show }]" @click="show = !show"></button>
 </template>
 
 <style lang="scss">
 .c-sidebar {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  bottom: 20px;
+  position: relative;
   width: 76px;
+  min-height: 100%;
   overflow: hidden auto;
   box-sizing: initial;
   border-left: 5px solid #4d5bf9;
@@ -55,7 +49,7 @@ const show = ref(true);
     left: 0;
     width: 100%;
     padding-left: 5px;
-    padding-top: 40px;
+    padding-top: 34px;
 
     .sidebar-item {
       position: relative;
@@ -145,28 +139,6 @@ const show = ref(true);
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
-  }
-}
-
-.toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 42px;
-  height: 42px;
-  border: none;
-  outline: none;
-  border-radius: 12px;
-  cursor: pointer;
-  background-color: #4d5bf9;
-
-  color: #fff;
-  font-size: 1.25rem;
-
-  transition: all 0.2s;
-
-  &.is-active {
-    background-color: #d44;
   }
 }
 </style>
